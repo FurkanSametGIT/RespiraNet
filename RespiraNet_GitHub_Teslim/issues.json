@@ -1,0 +1,212 @@
+[
+  {
+    "id": "DOC-01",
+    "title": "[DOC-01] Use Case diyagramını oluştur",
+    "body": "## Amaç\nKullanıcı ve araştırmacı aktörlerini; WAV yükleme, kalite kontrolü, ICBHI deneysel analiz, geçmiş silme ve E0-E1-E2 metriklerini göster.\n\n## Kabul kriterleri\n[ ] Aktörler doğru tanımlandı\n[ ] Klinik tanı use case olarak eklenmedi\n[ ] Kaynak .dot/.mmd ve görsel repoda\n\n## Referans\nRespiraNet öneri formu / hafta planı.\n",
+    "labels": [
+      "week-1",
+      "diagram",
+      "documentation"
+    ]
+  },
+  {
+    "id": "DOC-02",
+    "title": "[DOC-02] Sistem mimarisi diyagramı",
+    "body": "## Amaç\nReact, FastAPI, PostgreSQL, korumalı dosyalar, model artefaktları ve harici dosya kalite akışı.\n\n## Kabul kriterleri\n[ ] Veri akışı ve hata yanıtları var\n[ ] Offline eğitim ile online inference ayrıldı\n[ ] SVG/PNG + kaynak mevcut\n\n## Referans\nRespiraNet öneri formu / hafta planı.\n",
+    "labels": [
+      "week-1",
+      "diagram",
+      "documentation"
+    ]
+  },
+  {
+    "id": "DOC-03",
+    "title": "[DOC-03] Akış 1: WAV yükleme ve kalite kontrolü",
+    "body": "## Amaç\n401 oturum, 400/413 format/boyut, 422 bozuk/sessiz dosya ve harici ses için kalite-only dalları.\n\n## Kabul kriterleri\n[ ] En az üç hata/özel durum dalı\n[ ] ICBHI kaynak kapısı mevcut\n[ ] Başlangıç-bitiş net\n\n## Referans\nRespiraNet öneri formu / hafta planı.\n",
+    "labels": [
+      "week-1",
+      "diagram",
+      "documentation"
+    ]
+  },
+  {
+    "id": "DOC-04",
+    "title": "[DOC-04] Akış 2: Veri hazırlama ve model eğitimi",
+    "body": "## Amaç\nICBHI anotasyon doğrulama, hasta bazlı split, E0/E1/E2, kaynak yetersizliği B planı ve metrik kaydı.\n\n## Kabul kriterleri\n[ ] Hasta sızıntı kontrolü var\n[ ] Eksik dosya ve kaynak hatası dalları var\n[ ] E1-E2 eş mimari\n\n## Referans\nRespiraNet öneri formu / hafta planı.\n",
+    "labels": [
+      "week-1",
+      "diagram",
+      "documentation"
+    ]
+  },
+  {
+    "id": "DOC-05",
+    "title": "[DOC-05] Akış 3: Sonuç/geçmiş ve kayıt silme",
+    "body": "## Amaç\nOturum, sahiplik, yetkisiz erişim, boş kayıt, silme ve önbelleksiz güncel liste.\n\n## Kabul kriterleri\n[ ] 401, 403 ve 404/boş liste dalları\n[ ] Kullanıcı yalnız kendi verisini görebilir\n\n## Referans\nRespiraNet öneri formu / hafta planı.\n",
+    "labels": [
+      "week-1",
+      "diagram",
+      "documentation"
+    ]
+  },
+  {
+    "id": "DOC-06",
+    "title": "[DOC-06] AI Pipeline diyagramı",
+    "body": "## Amaç\nICBHI → hasta bazlı split → MFCC/LogMel → E0/E1/E2 → aynı temiz/20/10 dB test → MacroF1/Se/Sp/ICBHI.\n\n## Kabul kriterleri\n[ ] SNR sadece test kopyalarında\n[ ] Gürültü artırma yalnız E2 eğitiminde\n[ ] Bootstrap hasta düzeyinde\n\n## Referans\nRespiraNet öneri formu / hafta planı.\n",
+    "labels": [
+      "week-1",
+      "diagram",
+      "documentation"
+    ]
+  },
+  {
+    "id": "FR-01",
+    "title": "[FR-01] ICBHI dosya ve anotasyon içe aktarma",
+    "body": "## Amaç\nSes-anotasyon eşleştirmesi yap; eksik/bozuk dosyaları sebebiyle raporla.\n\n## Kabul kriterleri\n[ ] Sayım tablosu var\n[ ] Hatalı kayıt ve gerekçesi var\n\n## Referans\nRespiraNet öneri formu / hafta planı.\n",
+    "labels": [
+      "week-3",
+      "functional",
+      "ai"
+    ]
+  },
+  {
+    "id": "FR-02",
+    "title": "[FR-02] Hasta bazlı train/val/test ayırma",
+    "body": "## Amaç\nAynı hasta hiçbir iki bölmede bulunmayacak; dondurulmuş split manifesti tutulacak.\n\n## Kabul kriterleri\n[ ] Hasta kesişimi sıfır\n[ ] Manifest SHA256 ve seed kayıtlı\n\n## Referans\nRespiraNet öneri formu / hafta planı.\n",
+    "labels": [
+      "week-3",
+      "functional",
+      "ai"
+    ]
+  },
+  {
+    "id": "FR-03",
+    "title": "[FR-03] E0/E1/E2 adil model karşılaştırması",
+    "body": "## Amaç\nMFCC+SVM; temiz MobileNetV3; yalnız train gürültülü eş MobileNetV3, aynı sabit test.\n\n## Kabul kriterleri\n[ ] E1-E2 ayarları eşleşir\n[ ] Temiz/20/10 dB ölçümleri var\n\n## Referans\nRespiraNet öneri formu / hafta planı.\n",
+    "labels": [
+      "week-5",
+      "functional",
+      "ai"
+    ]
+  },
+  {
+    "id": "FR-04",
+    "title": "[FR-04] WAV yükleme ve temel doğrulama",
+    "body": "## Amaç\nWAV içerik, boyut ve süre doğrulaması; JSON hata kodları.\n\n## Kabul kriterleri\n[ ] Geçerli WAV kabul edilir\n[ ] Boş/bozuk/uzun dosya reddedilir\n\n## Referans\nRespiraNet öneri formu / hafta planı.\n",
+    "labels": [
+      "week-4",
+      "functional",
+      "backend"
+    ]
+  },
+  {
+    "id": "FR-05",
+    "title": "[FR-05] Doğrulanmış ICBHI örneği sonuç ekranı",
+    "body": "## Amaç\nDört sınıf olasılığı, model sürümü, araştırma amaçlı uyarı; harici kayıt için kalite-only.\n\n## Kabul kriterleri\n[ ] Referans doğrulaması sunucuda\n[ ] Telefon sesi tanı iddiası yok\n\n## Referans\nRespiraNet öneri formu / hafta planı.\n",
+    "labels": [
+      "week-6",
+      "functional",
+      "frontend"
+    ]
+  },
+  {
+    "id": "FR-06",
+    "title": "[FR-06] Kalite hata yönetimi ve gerekçeler",
+    "body": "## Amaç\nHata kodları BAD_FORMAT, TOO_LONG, SILENCE, CORRUPT; kullanıcıya anlaşılır mesaj.\n\n## Kabul kriterleri\n[ ] En az 4 uç durum testi\n[ ] Loglarda tanımlayıcı gerekçe\n\n## Referans\nRespiraNet öneri formu / hafta planı.\n",
+    "labels": [
+      "week-6",
+      "functional",
+      "backend"
+    ]
+  },
+  {
+    "id": "FR-07",
+    "title": "[FR-07] Kullanıcı yetkisi ve kayıt geçmişi",
+    "body": "## Amaç\nKayıt sahibi listeler, görür ve siler; başka hesabın kaydı 403/404 olarak reddedilir.\n\n## Kabul kriterleri\n[ ] Sahiplik filtresi\n[ ] Yetki negatif testi\n[ ] Silinen dosya da temizlenir\n\n## Referans\nRespiraNet öneri formu / hafta planı.\n",
+    "labels": [
+      "week-4",
+      "functional",
+      "security"
+    ]
+  },
+  {
+    "id": "FR-08",
+    "title": "[FR-08] E0/E1/E2 deney raporu ekranı",
+    "body": "## Amaç\nMacro-F1, Se, Sp, ICBHI, 3 SNR koşulu ve sınıf bazlı hataları göster.\n\n## Kabul kriterleri\n[ ] Ölçülmeyen sonuçlar — olarak gösterilir\n[ ] SNR kopyaları bağımsız hasta sayılmaz\n\n## Referans\nRespiraNet öneri formu / hafta planı.\n",
+    "labels": [
+      "week-7",
+      "functional",
+      "ai"
+    ]
+  },
+  {
+    "id": "NFR-01",
+    "title": "[NFR-01] Kimlik ve dosya erişimi güvenlik kontrolleri",
+    "body": "## Amaç\nParola özeti, JWT, MIME içerik kontrolü, yetkisiz erişim engeli, gizli anahtar ortam değişkeni.\n\n## Kabul kriterleri\n[ ] Negatif yetki testleri\n[ ] Sırlar repoda yok\n\n## Referans\nRespiraNet öneri formu / hafta planı.\n",
+    "labels": [
+      "week-9",
+      "non-functional",
+      "security"
+    ]
+  },
+  {
+    "id": "NFR-02",
+    "title": "[NFR-02] Tekrarlanabilir deney konfigürasyonu",
+    "body": "## Amaç\nSeed, split manifest, hasta dağılımı, model SHA256, eğitim konfigürasyonu.\n\n## Kabul kriterleri\n[ ] Aynı seed ve manifest kullanılabilir\n[ ] Deney raporuna bağlanır\n\n## Referans\nRespiraNet öneri formu / hafta planı.\n",
+    "labels": [
+      "week-3",
+      "non-functional",
+      "ai"
+    ]
+  },
+  {
+    "id": "NFR-03",
+    "title": "[NFR-03] CPU p50/p95 gecikme ölçümü",
+    "body": "## Amaç\n4 saniyelik en az 100 sesle belirtilen CPU üzerinde p50/p95, hedef p95 ≤1 saniye.\n\n## Kabul kriterleri\n[ ] CPU ve örnek sayısı raporda\n[ ] Hedef ile gerçek ölçüm karıştırılmaz\n\n## Referans\nRespiraNet öneri formu / hafta planı.\n",
+    "labels": [
+      "week-9",
+      "non-functional",
+      "test"
+    ]
+  },
+  {
+    "id": "NFR-04",
+    "title": "[NFR-04] Docker kurulum + birim/entegrasyon testleri",
+    "body": "## Amaç\nDocker Compose, API, PostgreSQL kurulumu; pytest ve stres testi senaryosu.\n\n## Kabul kriterleri\n[ ] Temiz makinede çalışır\n[ ] README adımları ve test kanıtı\n\n## Referans\nRespiraNet öneri formu / hafta planı.\n",
+    "labels": [
+      "week-8",
+      "non-functional",
+      "devops"
+    ]
+  },
+  {
+    "id": "DES-01",
+    "title": "[DES-01] Figma: 6 ekranlık tıklanabilir akış",
+    "body": "## Amaç\nGiriş, Ana panel, Yükleme, Sonuç, Geçmiş, Model deneyleri. 6 SVG ekran ve HTML akış taslağı hazır.\n\n## Kabul kriterleri\n[ ] 6 ekran Frame olarak Figma içe aktarılır\n[ ] Butonlar birbirine bağlanır\n[ ] 401/kalite-only örnekleri gösterilir\n\n## Referans\nRespiraNet öneri formu / hafta planı.\n",
+    "labels": [
+      "week-2",
+      "design",
+      "frontend"
+    ]
+  },
+  {
+    "id": "DB-01",
+    "title": "[DB-01] ER diyagramı ve PostgreSQL şeması",
+    "body": "## Amaç\nusers, reference_samples, recordings, quality_checks, model_versions, predictions, experiment_runs, experiment_metrics.\n\n## Kabul kriterleri\n[ ] PK/FK ve kardinaliteler doğru\n[ ] db/schema.sql PostgreSQL üzerinde doğrulanır\n\n## Referans\nRespiraNet öneri formu / hafta planı.\n",
+    "labels": [
+      "week-2",
+      "database",
+      "documentation"
+    ]
+  },
+  {
+    "id": "DB-02",
+    "title": "[DB-02] Veri sözlüğü ve teknoloji yığını tablosu",
+    "body": "## Amaç\nTüm temel alanları, veri tiplerini, kısıtları ve teknoloji seçiminin gerekçesini belgele.\n\n## Kabul kriterleri\n[ ] Sözlük SQL ile tutarlı\n[ ] React/FastAPI/PostgreSQL/E0-E1-E2 eşleşir\n\n## Referans\nRespiraNet öneri formu / hafta planı.\n",
+    "labels": [
+      "week-2",
+      "database",
+      "documentation"
+    ]
+  }
+]

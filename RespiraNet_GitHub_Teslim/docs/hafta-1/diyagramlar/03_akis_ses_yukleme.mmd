@@ -1,0 +1,14 @@
+flowchart TD
+ A([Başla: Oturum]) --> B{Oturum geçerli mi?}
+ B -->|Hayır| E1["401 - Giriş gerekli"]
+ B -->|Evet| C["WAV dosyasını seç ve yükle"]
+ C --> D{Tür, boyut ve süre geçerli mi?}
+ D -->|Hayır| E2["400/413 - Geçersiz dosya"]
+ D -->|Evet| F{Boş, bozuk veya aşırı sessiz mi?}
+ F -->|Evet| E3["422 - Kalite hatası"]
+ F -->|Hayır| G{Kaynak sunucuda ICBHI örneği olarak doğrulandı mı?}
+ G -->|Evet| H["Seçili model ile 4 sınıflı deneysel tahmin"]
+ G -->|Hayır| I["Yalnız kalite raporu; klinik sınıflandırma yok"]
+ H --> J["Kullanıcıya ait sonuç kaydı"]
+ I --> J
+ J --> K(["Sonuç / uyarı ekranı"])

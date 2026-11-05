@@ -1,0 +1,56 @@
+erDiagram
+  USERS ||--o{ RECORDINGS : owns
+  REFERENCE_SAMPLES |o--o{ RECORDINGS : references
+  RECORDINGS ||--o| QUALITY_CHECKS : has
+  RECORDINGS ||--o{ PREDICTIONS : produces
+  MODEL_VERSIONS ||--o{ PREDICTIONS : used_in
+  MODEL_VERSIONS ||--o{ EXPERIMENT_RUNS : trained_as
+  EXPERIMENT_RUNS ||--o{ EXPERIMENT_METRICS : measured_by
+  USERS {
+    uuid id PK
+    string email UK
+    string password_hash
+    string role
+  }
+  REFERENCE_SAMPLES {
+    uuid id PK
+    string dataset_key
+    string recording_key UK
+    string patient_code
+  }
+  RECORDINGS {
+    uuid id PK
+    uuid user_id FK
+    uuid reference_sample_id FK
+    string source_type
+    string file_storage_key
+  }
+  QUALITY_CHECKS {
+    uuid id PK
+    uuid recording_id FK
+    string status
+    json reason_codes
+  }
+  MODEL_VERSIONS {
+    uuid id PK
+    string condition_code
+    string version_tag
+    string artifact_sha256
+  }
+  PREDICTIONS {
+    uuid id PK
+    uuid recording_id FK
+    uuid model_version_id FK
+    json class_probabilities
+  }
+  EXPERIMENT_RUNS {
+    uuid id PK
+    uuid model_version_id FK
+    string split_manifest_sha256
+  }
+  EXPERIMENT_METRICS {
+    uuid id PK
+    uuid experiment_run_id FK
+    int snr_db
+    float macro_f1
+  }

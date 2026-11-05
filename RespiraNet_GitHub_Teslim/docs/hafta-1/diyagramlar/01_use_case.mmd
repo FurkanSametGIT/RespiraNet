@@ -1,0 +1,12 @@
+flowchart LR
+  U["Kullanıcı"] --> A(["Hesap aç / giriş yap"])
+  U --> B(["WAV yükle"])
+  B --> C(["Ses kalite kontrolü"])
+  C -->|Doğrulanmış ICBHI örneği| D(["4 sınıflı deneysel analiz"])
+  C -->|Harici ses| E(["Yalnız kalite raporu"])
+  D --> F(["Sonuç ve araştırma uyarısı"])
+  E --> F
+  U --> G(["Kendi kayıtlarını görüntüle / sil"])
+  R["Araştırmacı / yönetici"] --> H(["E0 / E1 / E2 metriklerini incele"])
+  R --> I(["Model sürümünü yönet"])
+  R --> A

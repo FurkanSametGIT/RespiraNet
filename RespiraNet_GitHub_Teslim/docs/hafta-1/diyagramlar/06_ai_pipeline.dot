@@ -1,0 +1,13 @@
+digraph AIPipe {
+ graph [label="RespiraNet | AI Pipeline (Çevrimdışı Araştırma)",labelloc=t,fontsize=22,fontname="DejaVu Sans",rankdir=LR,splines=polyline,ranksep=.66,nodesep=.33,pad=.23,bgcolor=white];
+ node [fontname="DejaVu Sans",shape=box,style="rounded,filled",fillcolor="#EFF6FF",color="#93B7DD",fontsize=10];edge [color="#64748B",fontname="DejaVu Sans",fontsize=9];
+ ds[label="ICBHI 2017\nSes + döngü anotasyonu",fillcolor="#DBEAFE"];
+ check[label="Doğrulama\nbozuk/eksik dosya"];split[label="Hasta bazlı bölme\ntrain / val / sabit test",fillcolor="#FEF3C7"];
+ feat0[label="MFCC",fillcolor="#F1F5F9"];feat1[label="Log-Mel",fillcolor="#F1F5F9"];
+ e0[label="E0\nSVM",fillcolor="#E0F2FE"];e1[label="E1\nMobileNetV3 temiz eğitim",fillcolor="#D1FAE5"];e2[label="E2\nAynı MobileNetV3 +\nYALNIZ eğitimde gürültü",fillcolor="#D1FAE5"];
+ test[label="SABİT test döngüleri\n0 / 20 / 10 dB SNR",fillcolor="#FEF3C7"];
+ metrics[label="Macro-F1 / Se / Sp / ICBHI\nSınıf bazlı hata / hasta-bootstrap"];
+ artefact[label="Model sürümü + deney kartı\nMetrik tablosu + rapor",fillcolor="#DBEAFE"];
+ ds->check->split;split->feat0->e0;split->feat1;feat1->e1;feat1->e2;e0->test;e1->test;e2->test;test->metrics->artefact;
+ note[label="E1-E2: aynı mimari / başlangıç / split.\nYalnız E2'de eğitim gürültüsü değişir.\nÜç SNR sürümü bağımsız hasta değildir.",shape=note,fillcolor="#FFF8DE",color="#F6C963",fontsize=9];note->metrics[style=dotted,arrowhead=none];
+}

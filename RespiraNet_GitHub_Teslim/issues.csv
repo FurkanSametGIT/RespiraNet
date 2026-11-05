@@ -1,0 +1,218 @@
+﻿id,title,body,labels
+DOC-01,[DOC-01] Use Case diyagramını oluştur,"## Amaç
+Kullanıcı ve araştırmacı aktörlerini; WAV yükleme, kalite kontrolü, ICBHI deneysel analiz, geçmiş silme ve E0-E1-E2 metriklerini göster.
+
+## Kabul kriterleri
+[ ] Aktörler doğru tanımlandı
+[ ] Klinik tanı use case olarak eklenmedi
+[ ] Kaynak .dot/.mmd ve görsel repoda
+
+## Referans
+RespiraNet öneri formu / hafta planı.
+","week-1,diagram,documentation"
+DOC-02,[DOC-02] Sistem mimarisi diyagramı,"## Amaç
+React, FastAPI, PostgreSQL, korumalı dosyalar, model artefaktları ve harici dosya kalite akışı.
+
+## Kabul kriterleri
+[ ] Veri akışı ve hata yanıtları var
+[ ] Offline eğitim ile online inference ayrıldı
+[ ] SVG/PNG + kaynak mevcut
+
+## Referans
+RespiraNet öneri formu / hafta planı.
+","week-1,diagram,documentation"
+DOC-03,[DOC-03] Akış 1: WAV yükleme ve kalite kontrolü,"## Amaç
+401 oturum, 400/413 format/boyut, 422 bozuk/sessiz dosya ve harici ses için kalite-only dalları.
+
+## Kabul kriterleri
+[ ] En az üç hata/özel durum dalı
+[ ] ICBHI kaynak kapısı mevcut
+[ ] Başlangıç-bitiş net
+
+## Referans
+RespiraNet öneri formu / hafta planı.
+","week-1,diagram,documentation"
+DOC-04,[DOC-04] Akış 2: Veri hazırlama ve model eğitimi,"## Amaç
+ICBHI anotasyon doğrulama, hasta bazlı split, E0/E1/E2, kaynak yetersizliği B planı ve metrik kaydı.
+
+## Kabul kriterleri
+[ ] Hasta sızıntı kontrolü var
+[ ] Eksik dosya ve kaynak hatası dalları var
+[ ] E1-E2 eş mimari
+
+## Referans
+RespiraNet öneri formu / hafta planı.
+","week-1,diagram,documentation"
+DOC-05,[DOC-05] Akış 3: Sonuç/geçmiş ve kayıt silme,"## Amaç
+Oturum, sahiplik, yetkisiz erişim, boş kayıt, silme ve önbelleksiz güncel liste.
+
+## Kabul kriterleri
+[ ] 401, 403 ve 404/boş liste dalları
+[ ] Kullanıcı yalnız kendi verisini görebilir
+
+## Referans
+RespiraNet öneri formu / hafta planı.
+","week-1,diagram,documentation"
+DOC-06,[DOC-06] AI Pipeline diyagramı,"## Amaç
+ICBHI → hasta bazlı split → MFCC/LogMel → E0/E1/E2 → aynı temiz/20/10 dB test → MacroF1/Se/Sp/ICBHI.
+
+## Kabul kriterleri
+[ ] SNR sadece test kopyalarında
+[ ] Gürültü artırma yalnız E2 eğitiminde
+[ ] Bootstrap hasta düzeyinde
+
+## Referans
+RespiraNet öneri formu / hafta planı.
+","week-1,diagram,documentation"
+FR-01,[FR-01] ICBHI dosya ve anotasyon içe aktarma,"## Amaç
+Ses-anotasyon eşleştirmesi yap; eksik/bozuk dosyaları sebebiyle raporla.
+
+## Kabul kriterleri
+[ ] Sayım tablosu var
+[ ] Hatalı kayıt ve gerekçesi var
+
+## Referans
+RespiraNet öneri formu / hafta planı.
+","week-3,functional,ai"
+FR-02,[FR-02] Hasta bazlı train/val/test ayırma,"## Amaç
+Aynı hasta hiçbir iki bölmede bulunmayacak; dondurulmuş split manifesti tutulacak.
+
+## Kabul kriterleri
+[ ] Hasta kesişimi sıfır
+[ ] Manifest SHA256 ve seed kayıtlı
+
+## Referans
+RespiraNet öneri formu / hafta planı.
+","week-3,functional,ai"
+FR-03,[FR-03] E0/E1/E2 adil model karşılaştırması,"## Amaç
+MFCC+SVM; temiz MobileNetV3; yalnız train gürültülü eş MobileNetV3, aynı sabit test.
+
+## Kabul kriterleri
+[ ] E1-E2 ayarları eşleşir
+[ ] Temiz/20/10 dB ölçümleri var
+
+## Referans
+RespiraNet öneri formu / hafta planı.
+","week-5,functional,ai"
+FR-04,[FR-04] WAV yükleme ve temel doğrulama,"## Amaç
+WAV içerik, boyut ve süre doğrulaması; JSON hata kodları.
+
+## Kabul kriterleri
+[ ] Geçerli WAV kabul edilir
+[ ] Boş/bozuk/uzun dosya reddedilir
+
+## Referans
+RespiraNet öneri formu / hafta planı.
+","week-4,functional,backend"
+FR-05,[FR-05] Doğrulanmış ICBHI örneği sonuç ekranı,"## Amaç
+Dört sınıf olasılığı, model sürümü, araştırma amaçlı uyarı; harici kayıt için kalite-only.
+
+## Kabul kriterleri
+[ ] Referans doğrulaması sunucuda
+[ ] Telefon sesi tanı iddiası yok
+
+## Referans
+RespiraNet öneri formu / hafta planı.
+","week-6,functional,frontend"
+FR-06,[FR-06] Kalite hata yönetimi ve gerekçeler,"## Amaç
+Hata kodları BAD_FORMAT, TOO_LONG, SILENCE, CORRUPT; kullanıcıya anlaşılır mesaj.
+
+## Kabul kriterleri
+[ ] En az 4 uç durum testi
+[ ] Loglarda tanımlayıcı gerekçe
+
+## Referans
+RespiraNet öneri formu / hafta planı.
+","week-6,functional,backend"
+FR-07,[FR-07] Kullanıcı yetkisi ve kayıt geçmişi,"## Amaç
+Kayıt sahibi listeler, görür ve siler; başka hesabın kaydı 403/404 olarak reddedilir.
+
+## Kabul kriterleri
+[ ] Sahiplik filtresi
+[ ] Yetki negatif testi
+[ ] Silinen dosya da temizlenir
+
+## Referans
+RespiraNet öneri formu / hafta planı.
+","week-4,functional,security"
+FR-08,[FR-08] E0/E1/E2 deney raporu ekranı,"## Amaç
+Macro-F1, Se, Sp, ICBHI, 3 SNR koşulu ve sınıf bazlı hataları göster.
+
+## Kabul kriterleri
+[ ] Ölçülmeyen sonuçlar — olarak gösterilir
+[ ] SNR kopyaları bağımsız hasta sayılmaz
+
+## Referans
+RespiraNet öneri formu / hafta planı.
+","week-7,functional,ai"
+NFR-01,[NFR-01] Kimlik ve dosya erişimi güvenlik kontrolleri,"## Amaç
+Parola özeti, JWT, MIME içerik kontrolü, yetkisiz erişim engeli, gizli anahtar ortam değişkeni.
+
+## Kabul kriterleri
+[ ] Negatif yetki testleri
+[ ] Sırlar repoda yok
+
+## Referans
+RespiraNet öneri formu / hafta planı.
+","week-9,non-functional,security"
+NFR-02,[NFR-02] Tekrarlanabilir deney konfigürasyonu,"## Amaç
+Seed, split manifest, hasta dağılımı, model SHA256, eğitim konfigürasyonu.
+
+## Kabul kriterleri
+[ ] Aynı seed ve manifest kullanılabilir
+[ ] Deney raporuna bağlanır
+
+## Referans
+RespiraNet öneri formu / hafta planı.
+","week-3,non-functional,ai"
+NFR-03,[NFR-03] CPU p50/p95 gecikme ölçümü,"## Amaç
+4 saniyelik en az 100 sesle belirtilen CPU üzerinde p50/p95, hedef p95 ≤1 saniye.
+
+## Kabul kriterleri
+[ ] CPU ve örnek sayısı raporda
+[ ] Hedef ile gerçek ölçüm karıştırılmaz
+
+## Referans
+RespiraNet öneri formu / hafta planı.
+","week-9,non-functional,test"
+NFR-04,[NFR-04] Docker kurulum + birim/entegrasyon testleri,"## Amaç
+Docker Compose, API, PostgreSQL kurulumu; pytest ve stres testi senaryosu.
+
+## Kabul kriterleri
+[ ] Temiz makinede çalışır
+[ ] README adımları ve test kanıtı
+
+## Referans
+RespiraNet öneri formu / hafta planı.
+","week-8,non-functional,devops"
+DES-01,[DES-01] Figma: 6 ekranlık tıklanabilir akış,"## Amaç
+Giriş, Ana panel, Yükleme, Sonuç, Geçmiş, Model deneyleri. 6 SVG ekran ve HTML akış taslağı hazır.
+
+## Kabul kriterleri
+[ ] 6 ekran Frame olarak Figma içe aktarılır
+[ ] Butonlar birbirine bağlanır
+[ ] 401/kalite-only örnekleri gösterilir
+
+## Referans
+RespiraNet öneri formu / hafta planı.
+","week-2,design,frontend"
+DB-01,[DB-01] ER diyagramı ve PostgreSQL şeması,"## Amaç
+users, reference_samples, recordings, quality_checks, model_versions, predictions, experiment_runs, experiment_metrics.
+
+## Kabul kriterleri
+[ ] PK/FK ve kardinaliteler doğru
+[ ] db/schema.sql PostgreSQL üzerinde doğrulanır
+
+## Referans
+RespiraNet öneri formu / hafta planı.
+","week-2,database,documentation"
+DB-02,[DB-02] Veri sözlüğü ve teknoloji yığını tablosu,"## Amaç
+Tüm temel alanları, veri tiplerini, kısıtları ve teknoloji seçiminin gerekçesini belgele.
+
+## Kabul kriterleri
+[ ] Sözlük SQL ile tutarlı
+[ ] React/FastAPI/PostgreSQL/E0-E1-E2 eşleşir
+
+## Referans
+RespiraNet öneri formu / hafta planı.
+","week-2,database,documentation"

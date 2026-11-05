@@ -1,0 +1,12 @@
+flowchart LR
+ A["ICBHI 2017 ses ve anotasyon"] --> B["Dosya / döngü doğrulaması"]
+ B --> C["Hasta bazlı sabit eğitim/doğrulama/test bölmesi"]
+ C --> F0["MFCC"] --> E0["E0: SVM baseline"]
+ C --> F1["Log-Mel"]
+ F1 --> E1["E1: MobileNetV3 - temiz eğitim"]
+ F1 --> E2["E2: aynı MobileNetV3 - yalnız eğitimde gürültü artırma"]
+ E0 --> T["Aynı hasta testleri: temiz, 20 dB, 10 dB"]
+ E1 --> T
+ E2 --> T
+ T --> M["Macro-F1, Se, Sp, ICBHI ve sınıf bazlı analiz"]
+ M --> R["Hasta bazlı bootstrap + sürüm/deney raporu"]

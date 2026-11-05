@@ -1,0 +1,13 @@
+flowchart TD
+ A(["Geçmişi aç"]) --> B{JWT geçerli mi?}
+ B -->|Hayır| E1["401 - Tekrar giriş yap"]
+ B -->|Evet| C["Sadece oturum sahibinin kayıtlarını listele"]
+ C --> D{Kayıt mevcut mu?}
+ D -->|Hayır| E2["Boş liste / 404"]
+ D -->|Evet| F["Kalite raporu veya ICBHI deneysel tahmini"]
+ F --> G{Silme istendi mi?}
+ G -->|Hayır| H(["Görüntülemeye devam"])
+ G -->|Evet| I{Kaydın sahibi mi?}
+ I -->|Hayır| E3["403 - Erişim reddi"]
+ I -->|Evet| J["Kayıt + sonuçlar + dosyayı temizle"]
+ J --> K(["Onay ve güncel liste"])

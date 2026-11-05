@@ -1,0 +1,14 @@
+flowchart LR
+  U["Tarayıcı / React"] --> A["FastAPI - Oturum / JWT"]
+  A --> V["WAV doğrulama"]
+  V --> S{"Kaynak doğrulanmış ICBHI örneği mi?"}
+  S -->|Evet| M["Sürüm seçili E0/E1/E2 modeli"]
+  S -->|Hayır| Q["Yalnız kalite raporu"]
+  M --> P["Sonuç ve geçmiş API"]
+  Q --> P
+  P --> U
+  P <--> DB[(PostgreSQL)]
+  V --> FS[(Korumalı dosya saklama)]
+  T["Çevrimdışı ICBHI eğitimi"] --> MR["Model artefaktları + metrikler"]
+  MR --> M
+  V -. "Hatalı dosya" .-> E["Açıklayıcı hata yanıtı"]

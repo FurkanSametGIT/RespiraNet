@@ -1,0 +1,14 @@
+flowchart TD
+ A(["ICBHI kayıt + anotasyon"]) --> B{Dosyalar ve etiketler tutarlı mı?}
+ B -->|Hayır| C["Hatalı örneği gerekçesiyle dışarıda tut"]
+ B -->|Evet| D["Hasta bazlı sabit train/val/test"]
+ C --> D
+ D --> E{Hasta kesişimi sıfır mı?}
+ E -->|Hayır| F["Bölmeyi düzelt; testi dondur"] --> E
+ E -->|Evet| G["E0 MFCC+SVM; E1 temiz MobileNetV3; E2 eğitim gürültülü aynı ağ"]
+ G --> H{Eğitim kaynakları yeterli mi?}
+ H -->|Hayır| I["Daha küçük eş mimarili E1/E2 ile kapsamı güncelle"]
+ H -->|Evet| J["Aynı test döngüsü: temiz / 20 / 10 dB"]
+ I --> J
+ J --> K["Macro-F1, Se, Sp, ICBHI, hasta-bazlı bootstrap"]
+ K --> L(["Sürüm + manifest + metrikleri kaydet"])

@@ -1,0 +1,13 @@
+digraph ER {
+ graph [label="RespiraNet | ER Diyagramı (PostgreSQL)",labelloc=t,fontsize=22,fontname="DejaVu Sans",rankdir=LR,splines=polyline,ranksep=1.1,nodesep=.45,pad=.25,bgcolor=white];
+ node [shape=record,fontname="DejaVu Sans",fontsize=10,style="filled",fillcolor="#EFF6FF",color="#8FABCC",margin=".12,.10"];edge[color="#64748B",fontname="DejaVu Sans",fontsize=9];
+ users[label="{users|PK id : uuid\lemail : citext (UQ)\lpassword_hash : text\lrole : varchar\lcreated_at : timestamptz\l}",fillcolor="#DBEAFE"];
+ ref[label="{reference_samples|PK id : uuid\ldataset_key : text\lrecording_key : text (UQ)\lpatient_code : text\l}"];
+ rec[label="{recordings|PK id : uuid\lFK user_id : uuid\lFK reference_sample_id : uuid?\lsource_type : varchar\lfile_storage_key : text\lcreated_at : timestamptz\l}"];
+ checks[label="{quality_checks|PK id : uuid\lFK recording_id : uuid (UQ)\lstatus : varchar\lreason_codes : jsonb\lmetrics : jsonb\l}"];
+ models[label="{model_versions|PK id : uuid\lcondition_code : E0/E1/E2\lversion_tag : text\lartifact_sha256 : char(64)\lstatus : varchar\l}",fillcolor="#D1FAE5"];
+ preds[label="{predictions|PK id : uuid\lFK recording_id : uuid\lFK model_version_id : uuid\lclass_probabilities : jsonb\lpredicted_label : varchar\lcreated_at : timestamptz\l}"];
+ runs[label="{experiment_runs|PK id : uuid\lFK model_version_id : uuid\lsplit_manifest_sha256 : char(64)\lseed : integer\lconfig : jsonb\l}"];
+ metrics[label="{experiment_metrics|PK id : uuid\lFK experiment_run_id : uuid\lsnr_db : integer / NULL(clean)\lmacro_f1, sensitivity, specificity\lsample_count : integer\l}"];
+ users->rec[label="1:N"];ref->rec[label="1:N (ops.)"];rec->checks[label="1:0..1"];rec->preds[label="1:N"];models->preds[label="1:N"];models->runs[label="1:N"];runs->metrics[label="1:N"];
+}

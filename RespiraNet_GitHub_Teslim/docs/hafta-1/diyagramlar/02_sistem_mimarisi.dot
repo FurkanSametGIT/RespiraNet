@@ -1,0 +1,13 @@
+digraph Architecture {
+ graph [label="RespiraNet | Sistem Mimarisi",labelloc=t,fontsize=22,fontname="DejaVu Sans",rankdir=LR,splines=ortho,ranksep=.9,nodesep=.4,pad=.25,bgcolor=white];
+ node[fontname="DejaVu Sans",fontsize=11,shape=box,style="rounded,filled",color="#9BB3CB",fillcolor="#EFF6FF",margin=".17,.12"];edge[color="#64748B",fontname="DejaVu Sans",fontsize=9];
+ browser [label="Kullanıcı\nTarayıcı / React",fillcolor="#DDEAFE"];
+ subgraph cluster_api {label="FastAPI / REST";fontname="DejaVu Sans";fontsize=13;style="rounded,filled";color="#BDD1E6";fillcolor="#F4F8FC";
+ auth[label="JWT oturum / yetki"];upload[label="WAV doğrulama\nTür, boyut, süre"];source[label="Kaynak kapısı\nICBHI referans / harici"];infer[label="Model çıkarımı\nE0, E1 veya E2"];history[label="Sonuç / geçmiş API"];
+ }
+ db[label="PostgreSQL\nKullanıcı, kayıt, kalite,\nmodel sürümü, sonuç"];fs[label="Korumalı dosya alanı\nSes (isteğe bağlı) / model"];registry[label="Model ve deney artefaktları\nE0/E1/E2 + metrikler",fillcolor="#F0FDF4"];
+ offline[label="Çevrimdışı eğitim\nICBHI → hasta ayrımı →\nMFCC/Log-Mel → E0/E1/E2",fillcolor="#F0FDF4"];
+ error[label="4xx / 5xx ve açıklayıcı\nhata yanıtı",fillcolor="#FFF1F2",color="#E1A7B1"];
+ browser -> auth -> upload -> source; source -> infer [label="onaylı ICBHI"]; source -> history [label="harici: kalite raporu"]; infer -> history; history -> browser;
+ auth -> db; upload -> fs; history -> db; infer -> registry; offline -> registry; source -> error [style=dashed]; upload -> error [style=dashed];
+}

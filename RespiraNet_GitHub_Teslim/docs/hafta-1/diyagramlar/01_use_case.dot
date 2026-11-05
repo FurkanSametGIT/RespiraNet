@@ -1,0 +1,23 @@
+digraph UseCase {
+ graph [label="RespiraNet | Use Case Diyagramı",labelloc=t,fontsize=22,fontname="DejaVu Sans",rankdir=LR,splines=polyline,nodesep=.30,ranksep=.8,bgcolor="white",pad=.22];
+ node [fontname="DejaVu Sans",fontsize=11]; edge [fontname="DejaVu Sans",fontsize=9,color="#52647B"];
+ user [label="Kullanıcı",shape=box,style="rounded,filled",fillcolor="#DBEAFE",color="#6BA3EE"];
+ research [label="Araştırmacı / yönetici",shape=box,style="rounded,filled",fillcolor="#DBEAFE",color="#6BA3EE"];
+ subgraph cluster_app {label="RespiraNet araştırma prototipi";fontsize=13;fontname="DejaVu Sans";style="rounded,filled";color="#C7D3E4";fillcolor="#F8FAFC";
+ login [label="Hesap aç / giriş yap",shape=ellipse,style=filled,fillcolor="white"];
+ upload [label="WAV yükle",shape=ellipse,style=filled,fillcolor="white"];
+ quality [label="Ses kalite kontrolü",shape=ellipse,style=filled,fillcolor="white"];
+ demo [label="Doğrulanmış ICBHI örneğiyle\n4 sınıflı analiz yap",shape=ellipse,style=filled,fillcolor="white"];
+ external [label="Harici kayıt için\nyalnız kalite raporu",shape=ellipse,style=filled,fillcolor="white"];
+ view [label="Sonuç / uyarı görüntüle",shape=ellipse,style=filled,fillcolor="white"];
+ history [label="Kendi geçmişini gör / sil",shape=ellipse,style=filled,fillcolor="white"];
+ compare [label="E0-E1-E2 metriklerini incele",shape=ellipse,style=filled,fillcolor="white"];
+ manage [label="Model sürümünü yönet",shape=ellipse,style=filled,fillcolor="white"];
+ }
+ user -> {login upload view history}; research -> {login compare manage};
+ upload -> quality [style=dashed,label="«include»"];
+ quality -> demo [style=dashed,label="doğrulanmış örnek"];
+ quality -> external [style=dashed,label="harici ses"];
+ demo -> view [style=dashed]; external -> view [style=dashed];
+ note [label="Klinik teşhis üretilmez.\nTelefon / bilinmeyen kaynak sesi\nICBHI dört sınıfına zorlanmaz.",shape=note,style=filled,color="#F6C963",fillcolor="#FFF8DE",fontsize=10]; note -> external [style=dotted,arrowhead=none];
+}
