@@ -1,0 +1,37 @@
+# Week-4/5 LOCAL development; production deployment belongs to week 8.
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: respira
+      POSTGRES_PASSWORD: local_dev_only_change_me
+      POSTGRES_DB: respiranet
+    ports: ["127.0.0.1:5433:5432"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ./backend/migrations/001_add_recording_notes.sql:/docker-entrypoint-initdb.d/02_notes.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U respira -d respiranet"]
+      interval: 5s
+      retries: 15
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports: ["127.0.0.1:8000:8000"]
+    environment:
+      DATABASE_URL: postgresql+psycopg://respira:local_dev_only_change_me@postgres:5432/respiranet
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET (at least 32 characters) in your .env file}
+      CORS_ORIGINS: http://localhost:5173
+      UPLOAD_DIR: /app/private_uploads
+      REPORT_FILE: /app/experiments/comparison.json
+    volumes:
+      - uploads:/app/private_uploads
+      - ./experiments:/app/experiments:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+volumes:
+  pgdata:
+  uploads:
